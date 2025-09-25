@@ -2,6 +2,6 @@
 
 SELECT 
 	country,
-	SUM(score) as total_score
+	SUM(score) AS total_score
 FROM customers
 GROUP BY country
