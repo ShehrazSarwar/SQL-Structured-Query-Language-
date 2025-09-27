@@ -1,4 +1,3 @@
-
 SELECT 
 	country,
 	SUM(score) as total_score
