@@ -9,3 +9,20 @@
    - Product price
    - Salesperson's name */
 
+USE SalesDB
+
+SELECT 
+A.OrderID,
+B.FirstName,
+B.LastName,
+C.Product AS 'ProductName',
+A.Sales AS 'SalesAmount',
+C.Price AS 'ProductPrice',
+D.FirstName AS  'SalespersonName'
+FROM sales.Orders AS A
+LEFT JOIN sales.Customers AS B
+ON A.CustomerID = B.CustomerID
+LEFT JOIN Sales.Products AS C
+ON A.ProductID = C.ProductID
+LEFT JOIN sales.Employees AS D
+ON A.SalesPersonID = D.EmployeeID
