@@ -12,13 +12,14 @@
 USE SalesDB
 
 SELECT 
-A.OrderID,
-B.FirstName,
-B.LastName,
-C.Product AS 'ProductName',
-A.Sales AS 'SalesAmount',
-C.Price AS 'ProductPrice',
-D.FirstName AS  'SalespersonName'
+	A.OrderID,
+	B.FirstName AS CustomerFirstName,
+	B.LastName AS CustomerLastName, 
+	C.Product AS ProductName,
+	A.Sales AS SalesAmount,
+	C.Price AS ProductPrice,
+	D.FirstName AS  EmployeeFirstName,
+	D.LastName AS  EmployeeLastName
 FROM sales.Orders AS A
 LEFT JOIN sales.Customers AS B
 ON A.CustomerID = B.CustomerID
