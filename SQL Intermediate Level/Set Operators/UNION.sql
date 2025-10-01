@@ -1,5 +1,5 @@
 -- UNION
-/* Combine the data from employees and customers into one Table */
+-- Combine the data from employees and customers into one Table.
 
 SELECT 
 FirstName,

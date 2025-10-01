@@ -1,5 +1,5 @@
 -- UNION ALL (FASTER THAN UNION)
-/* Combine the data from employees and customers into one Table, including duplicates*/
+-- Combine the data from employees and customers into one Table, including duplicates.
 
 SELECT 
 FirstName,
