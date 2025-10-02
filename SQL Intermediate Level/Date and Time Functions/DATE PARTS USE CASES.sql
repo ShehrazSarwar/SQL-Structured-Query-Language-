@@ -26,11 +26,12 @@ GROUP BY MONTH(OrderDate)
    How many orders were placed each month (using friendly month names)?
 */
 
-SELECT 
+SELECT
 	DATENAME(Month,(OrderDate)) AS Month,
 	COUNT(*) AS OrdersPlaced
 FROM Sales.Orders
 GROUP BY DATENAME(Month,(OrderDate))
+ORDER BY MIN(MONTH(OrderDate))
 
 /* TASK 8:
    Show all orders that were placed during the month of February.
