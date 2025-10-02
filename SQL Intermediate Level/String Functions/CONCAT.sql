@@ -1,4 +1,4 @@
--- CONCAT(Col or val, Col or Val)
+-- CONCAT(Col or val, Col or Val) -> Combine Multiple Strings Into One
 
 USE SalesDB
 SELECT
