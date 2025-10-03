@@ -6,6 +6,7 @@ SELECT
 	OrderDate,
 	ISDATE(OrderDate) AS Is_Date,
 	CASE WHEN ISDATE(OrderDate) = 1 THEN CAST(OrderDate AS DATE)
+		 ELSE '9999-01-01' -- Dummy Value
 	END AS NewOrderDate
 FROM
 (
@@ -14,3 +15,4 @@ FROM
 	SELECT '2025-08-23' UNION
 	SELECT '2025-08'
 ) AS t
+--WHERE ISDATE(OrderDate) = 0
