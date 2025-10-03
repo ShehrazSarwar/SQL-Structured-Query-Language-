@@ -1,0 +1,2 @@
+-- CAST(Value AS data_type) 
+-- Convert data types using CAST.
