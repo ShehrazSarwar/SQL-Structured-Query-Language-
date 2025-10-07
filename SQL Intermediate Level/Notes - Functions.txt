@@ -1,0 +1,168 @@
+SQL - String Functions:
+1) CONCAT(Col or Val, Col or Val)
+2) TRIM(Col or Val)
+3) UPPER(Col or Val)
+4) LOWER(Col or Val)
+5) LEN(Col or Val)
+6) REPLACE(Col or Val, Old, New)
+8) LEFT(Col or Val, Length)
+9) RIGHT(Col or Val, Length) 
+10) SUBSET(Col or Val, Start, Length)
+CHARINDEX('search_string',Col or Val) -> return index position
+
+SQL - Numeric Functions :
+1) ROUND(Col or Val,Round_Value)
+2) ABS(Col or Val)
+
+
+SQL - Date and Time Functions:
+ -> PART EXTRACTION:
+1) GETDATE()  -> Return Current Date and Time
+2) YEAR(date) -> Return INT Value
+3) MONTH(date)-> Return INT Value
+4) DAY(date)  -> Return INT Value
+5) DATEPART(part, date) -> Return INT Value
+parts can be -> year, month, day, week, weekday, quarter, hour, etc..
+6) DATENAME(part, date) -> Return String
+parts can be same as DATEPART()
+7) DATETRUNC(part, date) -> reset
+part can be -> year, month, date, hour, minute
+8) EOMONTH(date) -> Return date with last day of the month
+
+ -> Formating, Casting or Converting Data:
+FORMAT() --> Used for both Number and Date
+CONVERT() For Date, take style as numbers
+CAST() --> For All if Applicable, to change data type
+
+
+1) Formating Data (Used For Both Date and Int)
+FORMAT(Col or Val, 'format') - Date
+yyyy-MM-dd -> Default format of Date
+hh:mm:ss tt -> Time in 12 Hours format 
+HH:mm:ss tt -> Time in 24 Hours format 
+
+MMM -> Jan, Feb....
+MMMM -> Full Month Name
+ddd -> Mon, Tue....
+dddd -> Full Day Name
+
+
+FORMAT(Col or Val, 'format') - Number
+For example value is 12342341.133
+N -> 1,234,2341.133
+C -> $1,234,2341.133
+P -> 123,423,411,33%
+
+
+2) Converting:
+CONVERT(data_type, Col or Val, [,style])
+Used to convert data types and can also be used to change format of dates only
+ 
+3) Casting
+CAST(Value AS data_type) 
+To Convert data types using CAST.
+
+
+Adding and Subtracting Dates:
+1) DATEADD(part, interval, date) -> For subtraction and addition to day, year or month
+2) DATEDIFF(part, start_date, end_date)-> Use to calculate the difference between dates
+Example Use Case Of DATEDIFF In Data Analysis: Time Gap Analysis.
+
+Date Validation:
+ISDATE(Value)  -> Check if a value is a date.
+
+
+SQL - NULL Functions:
+For Replacing NULL:
+1) ISNULL(Col,Value)
+2) COALESCE(Value1, Value2, Value3,....)
+
+For Setting NULL:
+NULLIF(Val,Val_To_Check) --> Return NULL
+
+NULL Validation:
+IS NULL() & IS NOT NULL()
+
+
+SQL - DATA POLICIES (Use Case Of NULL):
+-- Remember LEN() Does Not Count Empty Spaces That's Why We Use DATALENGTH()
+DATALENGTH() Count Each Character of any type!
+
+Used to clean data quality issues like:
+1_Blank Spaces: We can't see them but if there are any spaces it can cause memory 
+and performance issues. --> Slower
+
+2_Empty String: Same like blank spaces but less memory and faster performance.
+
+3_NULL: Best Performance and takes very minimal memory space.
+
+Policy 1: We Can Use TRIM() VARCHAR or String function to remove empty spaces from the data.
+
+Policy 2: The Best way to handle above data quality issues is to replace empty strings with NULL after Trimming if there is any spaces.
+
+Policy 3: Use the default value like 'unknown' and avoid using nulls, empty strings and blank spaces.
+
+
+SQL - CASE STATEMENT (IF ELSE):
+Evaluates a list of conditions and returns a first value when the first condition is met.
+
+Syntax (Full Form):
+CASE 
+	WHEN Condition1 THEN result1
+	WHEN Condition2 THEN result2
+	...
+	ELSE result3 --> Optional (default result)
+END
+
+
+Use Cases:
+1) Categorizing Data: Group the data into different categories based on certain conditions.
+2) Mapping Data: Mapping Flag Values for visual reportings.
+3) Handling Nulls: Replace Nulls with a specific value.
+4) Conditional Aggregation: Apply aggregate function on subsets of data that fulfiills certain condition.
+
+
+RULES: 
+The data types of the results must be matching.
+Can be use anywhere in the query.
+
+
+Syntax (Quick Form):
+CASE Column
+	WHEN Condition1 THEN result1
+	WHEN Condition2 THEN result2
+	...
+	ELSE result3 --> Optional (default result)
+END
+
+Rule: Only used on one column.
+
+Example:
+CASE Country
+	WHEN 'Germany' THEN 'DE'
+	WHEN 'USA'     THEN 'US'
+	ELSE 'N/A'
+END
+
+
+SQL - Aggregate Functions:
+which allow performing calculations on multiple rows of data to generate summary results.
+
+BASIC Aggregate Functions
+COUNT(*) : Count No of Rows
+SUM(Col)
+AVG(Col)
+MAX(Col)
+MIN(Col)
+
+GROUPED AGGREGATIONS - GROUP BY
+Example: Aggregate per customer
+SELECT
+    customer_id,
+    COUNT(*) AS total_orders,
+    SUM(sales) AS total_sales,
+    AVG(sales) AS avg_sales,
+    MAX(sales) AS highest_sales,
+    MIN(sales) AS lowest_sales
+FROM orders
+GROUP BY customer_id
