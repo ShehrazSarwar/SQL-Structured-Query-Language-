@@ -1,4 +1,4 @@
---   USE CASE: CATEGORIZE DATA
+--  USE CASE: CATEGORIZE DATA
 
 /* TASK 1: 
    Create a report showing total sales for each category:
