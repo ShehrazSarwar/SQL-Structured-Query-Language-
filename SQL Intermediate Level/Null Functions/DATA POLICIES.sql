@@ -14,7 +14,9 @@ WITH Orders AS (
 SELECT 
     *,
     DATALENGTH(Category) AS LenCategory,
-    TRIM(Category) AS Policy1
+    TRIM(Category) AS Policy1,
+	NULLIF(TRIM(Category),'') AS Policy2,
+	COALESCE(NULLIF(TRIM(Category),''), 'unknown')  AS Policy3
 FROM Orders;
 
 -- Remember LEN() Does Not Count Empty Spaces That's Why We Are Using DATALENGTH()
