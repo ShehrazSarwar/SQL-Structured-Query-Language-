@@ -1,3 +1,5 @@
+Check out The Blog Here: https://shehzifiedblogs.hashnode.dev/sql-functions-made-easy-a-beginners-guide-to-data-transformation 
+
 SQL - String Functions:
 1) CONCAT(Col or Val, Col or Val)
 2) TRIM(Col or Val)
@@ -165,4 +167,5 @@ SELECT
     MAX(sales) AS highest_sales,
     MIN(sales) AS lowest_sales
 FROM orders
+
 GROUP BY customer_id
