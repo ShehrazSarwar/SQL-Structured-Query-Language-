@@ -40,7 +40,7 @@ WHERE RankByProduct = 1
 
 
 -- BOTTOM N Analysis:
--- 2. Find the lowest 2 customers based on their total sales
+-- 3. Find the lowest 2 customers based on their total sales
 
 SELECT *
 FROM (
@@ -52,3 +52,16 @@ FROM (
 	GROUP BY CustomerID
 ) t
 WHERE RankByTotalSales <= 2
+
+
+-- 4. Use Case | Assign Unique IDs to the Rows of the 'Order Archive'
+
+SELECT
+	ROW_NUMBER() OVER(ORDER BY OrderID) AS UniqueID,
+	*
+FROM Sales.OrdersArchive
+
+
+-- Use Case | Identify Duplicates:
+-- 5. Identify Duplicate Rows in 'Order Archive' and return a clean result without any duplicates
+
