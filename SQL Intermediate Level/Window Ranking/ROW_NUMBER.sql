@@ -65,3 +65,11 @@ FROM Sales.OrdersArchive
 -- Use Case | Identify Duplicates:
 -- 5. Identify Duplicate Rows in 'Order Archive' and return a clean result without any duplicates
 
+SELECT *
+FROM (
+	SELECT
+		ROW_NUMBER() OVER(PARTITION BY OrderID ORDER BY CreationTime DESC) AS RN,
+		*
+	FROM Sales.OrdersArchive
+) AS UniqueOrdersArchive
+WHERE RN = 1
