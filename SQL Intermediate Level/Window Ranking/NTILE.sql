@@ -14,6 +14,7 @@ FROM Sales.Orders;
 
 
 -- USE CASES:
+-- Data Segmentation
 -- 1. Segment all Orders into 3 Categories: High, Medium, and Low Sales.
 
 SELECT
@@ -32,3 +33,11 @@ FROM (
         NTILE(3) OVER (ORDER BY Sales DESC) AS Buckets
     FROM Sales.Orders
 ) AS SalesBuckets;
+
+
+-- Load Balancing
+-- 2. Divide Orders into Groups for Processing
+SELECT 
+	NTILE(5) OVER(ORDER BY OrderID) AS Buckets,
+    *
+FROM Sales.Orders;
