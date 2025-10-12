@@ -72,3 +72,26 @@ WHERE Gender = 'F' AND Salary > ANY(SELECT Salary FROM Sales.Employees WHERE Gen
    Show the details of orders made by customers in Germany.
 */
 
+SELECT
+	*
+FROM Sales.Orders AS O
+WHERE EXISTS ( 
+			  SELECT *
+			  FROM Sales.Customers AS C
+			  WHERE Country = 'Germany' AND
+			  O.CustomerID = C.CustomerID
+);
+
+/* TASK 12:
+   Show the details of orders made by customers not in Germany.
+*/
+
+SELECT
+	*
+FROM Sales.Orders AS O
+WHERE NOT EXISTS ( 
+			  SELECT *
+			  FROM Sales.Customers AS C
+			  WHERE Country = 'Germany' AND
+			  O.CustomerID = C.CustomerID
+);
