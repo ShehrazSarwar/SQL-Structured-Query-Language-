@@ -137,3 +137,86 @@ WITH CTE_Sales AS (
 		GROUP BY store_id, store_name)
 SELECT * FROM CTE_Sales
 WHERE TotalSale > (SELECT AVG(TotalSale) FROM CTE_Sales);
+
+
+--------------------------------------------------------------------------------
+/* < USING SUBQUERY IN SELECT CLAUSE > */
+/* QUESTION: Fetch all employee details and add remarks to those employees who earn more than the average pay. */
+
+SELECT
+	*,
+	CASE WHEN SALARY > (SELECT AVG(SALARY) FROM EMPLOYEE) THEN 'Above Average Pay'
+		 ELSE 'N/A'
+	END AS Remarks
+FROM EMPLOYEE
+
+-- Alternative Way Using CROSS JOIN
+SELECT
+	E.*,
+	CASE WHEN SALARY > AvgP.AvgPay THEN 'Above Average Pay'
+		 ELSE 'N/A'
+	END AS Remarks
+FROM EMPLOYEE AS E
+CROSS JOIN (SELECT AVG(SALARY) AS AvgPay FROM EMPLOYEE) AS AvgP
+
+
+--------------------------------------------------------------------------------
+/* < Using Subquery in HAVING clause > */
+/* QUESTION: Find the stores who have sold more units than the average units sold by all stores. */
+
+SELECT
+	store_name,
+	SUM(quantity) AS Total_Units
+FROM sales
+GROUP BY store_name
+HAVING SUM(quantity) > (SELECT AVG(quantity) FROM sales)
+
+
+-- SQL COMMANDS WHICH ALLOW A SUBQUERY
+--------------------------------------------------------------------------------
+/* < Using Subquery with INSERT statement > */
+/* QUESTION: Insert data to employee history table. Make sure not insert duplicate records. */
+
+-- TRUNCATE TABLE employee_history
+INSERT INTO employee_history
+SELECT 
+	E.*, 
+	D.location
+FROM EMPLOYEE AS E
+JOIN department AS D
+ON D.dept_name = E.DEPT_NAME
+WHERE NOT EXISTS (SELECT 1 FROM employee_history AS EH WHERE EH.emp_id = E.EMP_ID)
+
+SELECT * FROM employee_history
+
+--------------------------------------------------------------------------------
+/* < Using Subquery with UPDATE statement > */
+/* QUESTION: Give 10% increment to all employees in Bangalore location based on the maximum
+salary earned by an emp in each dept. Only consider employees in employee_history table. */
+
+UPDATE EMPLOYEE
+SET SALARY = (SELECT MAX(SALARY) + (MAX(SALARY) * 0.1)
+			  FROM employee_history EH
+			  WHERE EH.dept_name = EMPLOYEE.DEPT_NAME)
+WHERE DEPT_NAME IN (SELECT dept_name FROM department WHERE location = 'Bangalore')
+AND EMP_ID IN (SELECT emp_id FROM employee_history);
+
+--------------------------------------------------------------------------------
+/* < Using Subquery with DELETE statement > */
+/* QUESTION: Delete all departments who do not have any employees. */
+
+-- First Check If Your Logic Works Before Deleting as It's A Risking Task
+SELECT dept_name
+    FROM department d2
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM employee e
+        WHERE e.dept_name = d2.dept_name
+)
+
+DELETE FROM department
+WHERE NOT EXISTS (SELECT 1
+				  FROM EMPLOYEE
+				  WHERE department.dept_name = EMPLOYEE.DEPT_NAME);
+
+SELECT * FROM department;
