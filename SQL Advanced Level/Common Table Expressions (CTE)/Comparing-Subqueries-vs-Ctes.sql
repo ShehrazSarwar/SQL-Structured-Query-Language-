@@ -82,7 +82,11 @@ WITH StoreSales AS (
 	FROM sales
 	GROUP BY store_id, store_name
 )
-SELECT *,
-	   AVG(TotalSale) OVER () AS AvgSale,
-	   TotalSale - AVG(TotalSale) OVER () AS DiffFromAvg
-FROM StoreSales
+SELECT *
+FROM 
+(SELECT
+	*,
+	AVG(TotalSale) OVER() AS AvgSale,
+	TotalSale - AVG(TotalSale) OVER() AS AvgDiff
+FROM StoreSales) AS X
+WHERE TotalSale > AvgSale
