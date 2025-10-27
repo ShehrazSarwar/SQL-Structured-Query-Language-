@@ -1,8 +1,6 @@
 -- SQL Common Table Expressions (CTEs)
 
-/* ==============================================================================
-   NON-RECURSIVE CTE
-===============================================================================*/
+-- NON-RECURSIVE CTE --
 
 -- Step1: Find the total Sales Per Customer (Standalone CTE)
 WITH CTE_Total_Sales AS (
