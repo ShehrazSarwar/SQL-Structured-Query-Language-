@@ -21,6 +21,6 @@ WHERE OrderStatus = 'Delivered';
 SELECT 
 	*
 INTO Sales.OrdersTest
-FROM #Orders
+FROM #Orders;
 
 SELECT * FROM Sales.OrdersTest
