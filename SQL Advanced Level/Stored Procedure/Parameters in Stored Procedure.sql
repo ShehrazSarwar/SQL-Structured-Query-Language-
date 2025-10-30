@@ -2,7 +2,7 @@
    Parameters in Stored Procedure
 ============================================================================== */
 
--- Define the Stored Procedure
+-- Update the Stored Procedure
 ALTER PROCEDURE GetCustomerSummary @country NVARCHAR(50) = 'USA' AS
 BEGIN
 	SELECT
