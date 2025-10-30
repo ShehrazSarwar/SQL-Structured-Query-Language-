@@ -1,15 +1,21 @@
 /* ==============================================================================
-   Multiple Queries in Stored Procedure
+   Variables in Stored Procedure
 ============================================================================== */
 
--- Update the Stored Procedure
+-- Edit the Stored Procedure
 ALTER PROCEDURE GetCustomerSummary @country NVARCHAR(50) = 'USA' AS
 BEGIN
+
+	DECLARE @TotalCustomers INT, @AvgScore INT
+
 	SELECT
-        COUNT(*) AS TotalCustomers,
-        AVG(Score) AS AvgScore
+        @TotalCustomers = COUNT(*),
+        @AvgScore = AVG(Score)
     FROM Sales.Customers
-    WHERE Country = @country;
+    WHERE Country = @country
+
+	PRINT 'Total Customers From ' + @country + ' : ' + CAST(@TotalCustomers AS NVARCHAR);
+	PRINT 'Avg Score From ' + @country + ' : ' + CAST(@AvgScore AS NVARCHAR);
 
 	SELECT
 		COUNT(*) AS TotalOrders,
@@ -21,5 +27,6 @@ BEGIN
 END
 
 --Execute Stored Procedure
-EXEC GetCustomerSummary @country = 'Germany'
-EXEC GetCustomerSummary
+EXEC GetCustomerSummary @Country = 'Germany';
+EXEC GetCustomerSummary @Country = 'USA';
+EXEC GetCustomerSummary;
