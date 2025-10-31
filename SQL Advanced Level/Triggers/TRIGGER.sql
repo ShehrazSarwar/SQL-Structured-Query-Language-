@@ -29,4 +29,5 @@ INSERT INTO Sales.Employees
 VALUES (8, 'Shehraz', 'Sarwar', 'DA', '2005-01-27', 'M', 80000, 3)
 
 -- Check If Trigger Works
+SELECT * FROM Sales.EmployeeLogs
 SELECT * FROM Sales.Employees
