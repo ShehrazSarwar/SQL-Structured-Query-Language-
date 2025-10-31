@@ -1,4 +1,6 @@
+-- ==================================
 -- TRIGGER IN SQL - With Log Use Case
+-- ==================================
 
 -- Create a Table For Trigger
 CREATE TABLE Sales.EmployeeLogs (
@@ -24,7 +26,7 @@ END
 
 -- Checking Trigger By Inserting New Employees
 INSERT INTO Sales.Employees
-VALUES (7, 'Zainab', 'Idrees', 'IT', '2005-01-15', 'F', 80000, 3)
+VALUES (8, 'Shehraz', 'Sarwar', 'DA', '2005-01-27', 'M', 80000, 3)
 
 -- Check If Trigger Works
-SELECT * FROM Sales.EmployeeLogs
+SELECT * FROM Sales.Employees
