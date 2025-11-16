@@ -58,3 +58,11 @@ GROUP BY c.customer_key,c.first_name, c.last_name
 ORDER BY total_revenue DESC
 
 -- What is the distribution of sold items across countries?
+SELECT
+	c.country,
+	SUM(s.sales_amount) AS total_revenue
+FROM gold.fact_sales s
+LEFT JOIN gold.dim_customers c
+ON c.customer_key = s.customer_key
+GROUP BY c.country
+ORDER BY total_revenue DESC
